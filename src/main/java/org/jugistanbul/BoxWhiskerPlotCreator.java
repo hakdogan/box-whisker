@@ -2,6 +2,7 @@ package org.jugistanbul;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * @author hakdogan (huseyin.akdogan@patikaglobal.com)
@@ -24,7 +25,7 @@ public class BoxWhiskerPlotCreator {
 
             String[] parts = input.split(" ");
             if(parts.length < 5){
-                System.out.println("The number string cannot be less than 5\n");
+                System.out.println("The size of the number array cannot be less than 5\n");
                 continue;
             }
 
@@ -34,6 +35,10 @@ public class BoxWhiskerPlotCreator {
             }
 
             Arrays.sort(numbers);
+            var sortedArray = Arrays.stream(numbers).mapToObj(String::valueOf)
+                    .collect(Collectors.joining(", "));
+
+            System.out.print(String.format("Sorted array: %s%n", sortedArray));
 
             double q1 = calculatePercentile(numbers, 25);
             double q2 = calculatePercentile(numbers, 50); // Medyan
